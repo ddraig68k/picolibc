@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+exec "$(dirname "$0")"/do-configure m68k-elf -Dtests=true -Dposix-console=true -Dmultilib=false "$@"

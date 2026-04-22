@@ -117,6 +117,8 @@ option('use-stdlib', type: 'boolean', value: false,
        description: 'Do not bypass the standard system library with -nostdlib (useful for native testing)')
 option('semihost', type: 'boolean', value: true,
        description: 'Include semihost bits. Disable when doing native testing.')
+option('m68k-syscall-api', type: 'combo', choices: ['semihost', 'dos-trap'], value: 'semihost',
+       description: 'Select m68k semihost backend protocol')
 option('os-linux', type: 'boolean', value: false,
        description: 'Include libos/linux bits. Enable for native Linux OS support.')
 option('fake-semihost', type: 'boolean', value: true,

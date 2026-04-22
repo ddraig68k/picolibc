@@ -33,22 +33,46 @@
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-src_semihost += files([
-                       'm68k_close.c',
-                       'm68k_exit.c',
-                       'm68k_fstat.c',
-                       'm68k_gettimeofday.c',
-                       'm68k_lseek.c',
-                       'm68k_open.c',
-                       'm68k_read.c',
-                       'm68k_rename.c',
-                       'm68k_semihost.S',
-                       'm68k_stat.c',
-                       'm68k_unlink.c',
-                       'm68k_write.c',
-                     ]) + [
-  src_semihost_fake_getentropy,
-  src_semihost_fake_getpid,
-  src_semihost_fake_isatty,
-  src_semihost_fake_kill,
-  ]
+m68k_syscall_api = get_option('m68k-syscall-api')
+
+if m68k_syscall_api == 'dos-trap'
+  src_semihost += files([
+                         'm68k_dos_close.c',
+                         'm68k_dos_exit.c',
+                         'm68k_dos_fstat.c',
+                         'm68k_dos_gettimeofday.c',
+                         'm68k_dos_isatty.c',
+                         'm68k_dos_lseek.c',
+                         'm68k_dos_open.c',
+                         'm68k_dos_read.c',
+                         'm68k_dos_rename.c',
+                         'm68k_dos_stat.c',
+                         'm68k_dos_syscall.S',
+                         'm68k_dos_unlink.c',
+                         'm68k_dos_write.c',
+                       ]) + [
+    src_semihost_fake_getentropy,
+    src_semihost_fake_getpid,
+    src_semihost_fake_kill,
+    ]
+else
+  src_semihost += files([
+                         'm68k_close.c',
+                         'm68k_exit.c',
+                         'm68k_fstat.c',
+                         'm68k_gettimeofday.c',
+                         'm68k_lseek.c',
+                         'm68k_open.c',
+                         'm68k_read.c',
+                         'm68k_rename.c',
+                         'm68k_semihost.S',
+                         'm68k_stat.c',
+                         'm68k_unlink.c',
+                         'm68k_write.c',
+                       ]) + [
+    src_semihost_fake_getentropy,
+    src_semihost_fake_getpid,
+    src_semihost_fake_isatty,
+    src_semihost_fake_kill,
+    ]
+endif
